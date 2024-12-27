@@ -27,7 +27,9 @@ export default function Card({ id, title, description, price, onHand }) {
 
 
     const handleEdit = async () => {    
-        setIsPopOverOpen(true);
+        setIsPopOverOpen(!isPopOverOpen);
+        const game = gameData.filter(game => game.id === id);
+        setFormData(game[0]);
     }
 
     const handleDelete = async () => {
@@ -85,7 +87,7 @@ export default function Card({ id, title, description, price, onHand }) {
                 <p>{onHand}</p>
             </div>
             <div className="buttons">
-                <Popover open={isPopOverOpen}>
+                <Popover open={isPopOverOpen} >
                     <PopoverTrigger className="w-24 h-12 mt-8" onClick={handleEdit}>Edit</PopoverTrigger>
                     <PopoverContent>
                         <form method='POST' className="flex flex-col" onSubmit={handleSubmit}>
